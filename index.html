@@ -15,7 +15,7 @@
         }
         
         body {
-            background-image: url(css/imagens/chuva.gif); /* Substitua pelo caminho da sua imagem */
+            background-image: url(css/imagens/chuva.gif);
             background-size: cover; /* Faz a imagem cobrir todo o fundo */
             background-position: center; /* Centraliza a imagem */
             background-repeat: no-repeat; /* Evita que a imagem se repita */
@@ -748,30 +748,40 @@
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Nome</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Assunto</label>
-                            <input type="text" id="subject" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Mensagem</label>
-                            <textarea id="message" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn">Enviar Mensagem</button>
-                    </form>
-                </div>
+    <div class="contact-form">
+        <form id="contact-form">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" id="name" name="name" class="form-control" required>
             </div>
-        </div>
-    </section>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Assunto</label>
+                <input type="text" id="subject" name="subject" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensagem</label>
+                <textarea id="message" name="message" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn">Enviar Mensagem</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            // Enviar e-mail usando EmailJS
+            emailjs.sendForm('service_uzt38k8', 'template_fgorcwn', this)
+                .then(function() {
+                    alert('Mensagem enviada com sucesso!');
+                }, function(error) {
+                    alert('Falha ao enviar a mensagem: ' + JSON.stringify(error));
+                });
+        });
+    </script>
 
     <!-- Footer -->
     <footer>
@@ -852,8 +862,17 @@
             }
         });
     </script>
+
+
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    (function(){
+        emailjs.init("O7QAUh-p-T1hZTDrF");
+    })();
+</script>
+
+
+
 </body>
 </html>
-
-
-Gostaria agora que vc me fale como eu faço pra na aba de entrar em contato o visitante preencher os campos e quando clicar em enviar mensagem eu receber um email no meu mail
